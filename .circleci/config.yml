@@ -19,8 +19,6 @@ jobs:
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
           docker build -t miguelgz/circleci-demo-docker:$TAG -f Dockerfile.dev .
-          echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USER --password-stdin
-          docker push miguelgz/circleci-demo-docker:$TAG
           
 workflows:
   my-custom-workflow:
