@@ -14,8 +14,8 @@ jobs:
     steps:
       - checkout
       - run: |
-          # docker build -t miguelgz/docker-react-tutorial -f Dockerfile.dev .
-          # docker run -e CI=true miguelgz/docker-react-tutorial npm run test
+          docker build -t miguelgz/docker-react-tutorial -f Dockerfile.dev .
+          docker run -e CI=true miguelgz/docker-react-tutorial npm run test
 workflows:
   my-custom-workflow:
     jobs:
