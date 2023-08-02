@@ -13,8 +13,10 @@ jobs:
     executor: docker-image
     steps:
       - checkout
-      - run: |
-          docker build -t miguelgz/docker-react-tutorial -f Dockerfile.dev .
+      - run:
+          name: "build"
+          command : docker build -t miguelgz/docker-react-tutorial -f Dockerfile.dev .
+          
 workflows:
   my-custom-workflow:
     jobs:
