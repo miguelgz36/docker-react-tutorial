@@ -1,14 +1,22 @@
-orbs:
-  docker: circleci/docker@1.7.0
-
-jobs:
-  example-job:
+version: 2.1
+executors:
+  docker-image:
     docker:
-      # replace with your preferred image
       - image: cimg/base:stable
+        auth:
+          # ensure you have first added these secrets
+          # visit app.circleci.com/settings/project/github/miguelgz36/docker-react-tutorial/environment-variables
+          username: $DOCKER_HUB_USER
+          password: $DOCKER_HUB_PASSWORD
+jobs:
+  my-job-name:
+    executor: docker-image
     steps:
-      - docker/install-docker
+      - checkout
+      - run: |
+          # docker build -t miguelgz/docker-react-tutorial -f Dockerfile.dev .
+          # docker run -e CI=true miguelgz/docker-react-tutorial npm run test
 workflows:
-  example-workflow:
+  my-custom-workflow:
     jobs:
-      - example-job
+      - my-job-name
