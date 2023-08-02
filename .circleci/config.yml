@@ -13,9 +13,11 @@ jobs:
     executor: docker-image
     steps:
       - checkout
-      - run:
-          name: "build"
-          command : docker build -t miguelgz/docker-react-tutorial -f Dockerfile.dev .
+      - run: |
+          TAG=0.1.$CIRCLE_BUILD_NUM
+          docker build -t CircleCI-Public/circleci-demo-docker:$TAG -f Dockerfile.dev .
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+          docker push CircleCI-Public/circleci-demo-docker:$TAG
           
 workflows:
   my-custom-workflow:
