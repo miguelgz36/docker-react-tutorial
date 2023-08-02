@@ -41,7 +41,7 @@ jobs:
           command: |
             docker image load < "images/miguelgz_circleci-demo-docker"    
       - run: |
-          docker run miguelgz/circleci-demo-docker npm run test        
+          docker run -e CI=true miguelgz/circleci-demo-docker npm run test        
 workflows:
   build-test-deploy:
     jobs:
