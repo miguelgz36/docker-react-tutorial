@@ -9,14 +9,20 @@ executors:
           username: $DOCKER_HUB_USER
           password: $DOCKER_HUB_PASSWORD
 jobs:
-  test-build-deploy:
+  build:
     executor: my-custom-executor
     steps:
       - checkout
       - run: |
           # docker build -t miguelgz/docker-react-tutorial -f Dockerfile.dev .
-          # docker run -e CI=true miguelgz/docker-react-tutorial npm run test 
+  test:
+    executor: my-custom-executor
+    steps:
+      - checkout
+      - run: |
+          # docker run -e CI=true miguelgz/docker-react-tutorial npm run test  
 workflows:
   my-custom-workflow:
     jobs:
-      - test-build-deploy
+      - build
+      - test
