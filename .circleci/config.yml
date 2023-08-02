@@ -22,7 +22,7 @@ jobs:
           name: Save image as tar
           command: |
             mkdir -p images
-            docker image save -o "images/miguelgz/circleci-demo-docker" "miguelgz/circleci-demo-docker"
+            docker image save -o "images/miguelgz_circleci-demo-docker" "miguelgz/circleci-demo-docker"
       - persist_to_workspace:
           root: .
           paths:
@@ -37,7 +37,7 @@ jobs:
       - run:
           name: Load image
           command: |
-            docker image load < "images/miguelgz/circleci-demo-docker"    
+            docker image load < "images/miguelgz_circleci-demo-docker"    
       - run: |
           docker run miguelgz/circleci-demo-docker npm run test        
 workflows:
