@@ -13,14 +13,12 @@ jobs:
     executor: my-custom-executor
     steps:
       - checkout
-      - run: |
-          # docker build -t miguelgz/docker-react-tutorial -f Dockerfile.dev .
+      - run: docker build -t miguelgz/docker-react-tutorial -f Dockerfile.dev .
   test:
     executor: my-custom-executor
     steps:
       - checkout
-      - run: |
-          # docker run -e CI=true miguelgz/docker-react-tutorial npm run test  
+      - run: docker run -e CI=true miguelgz/docker-react-tutorial npm run test   
 workflows:
   my-custom-workflow:
     jobs:
