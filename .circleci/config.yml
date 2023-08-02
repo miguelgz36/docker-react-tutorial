@@ -28,7 +28,7 @@ jobs:
           docker_layer_caching: true
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
-          docker run -e CI=true miguelgz/circleci-demo-docker:$TAG npm run test        
+          docker run miguelgz/circleci-demo-docker:$TAG npm run test        
 workflows:
   build-test-deploy:
     jobs:
