@@ -1,26 +1,14 @@
-version: 2.1
-
 orbs:
-  node: circleci/node@4.7.0
-  
-jobs:
-  build:
-    docker:
-      - image: cimg/node:17.2.0
-    steps:
-      - checkout
-      - run: docker build -t miguelgz/docker-react-tutorial -f Dockerfile.dev .
-  test:
-    docker:
-      - image: cimg/node:17.2.0
-    steps:
-      - checkout
-      - run: docker run -e CI=true miguelgz/docker-react-tutorial npm run test   
-workflows:
-  my-custom-workflow:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
+  docker: circleci/docker@1.7.0
 
+jobs:
+  example-job:
+    docker:
+      # replace with your preferred image
+      - image: cimg/base:stable
+    steps:
+      - docker/install-docker
+workflows:
+  example-workflow:
+    jobs:
+      - example-job
