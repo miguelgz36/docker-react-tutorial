@@ -18,6 +18,15 @@ jobs:
           docker_layer_caching: true
       - run: |
           docker build -t miguelgz/circleci-demo-docker -f Dockerfile.dev .
+      - run:
+          name: Save image as tar
+          command: |
+            mkdir -p images
+            docker image save -o "images/miguelgz/circleci-demo-docker" "miguelgz/circleci-demo-docker"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - images          
   test:
     executor: docker-image
     steps:
@@ -25,6 +34,10 @@ jobs:
       - setup_remote_docker:
           version: 20.10.14
           docker_layer_caching: true
+      - run:
+          name: Load image
+          command: |
+            docker image load < "images/miguelgz/circleci-demo-docker"    
       - run: |
           docker run miguelgz/circleci-demo-docker npm run test        
 workflows:
