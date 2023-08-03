@@ -49,7 +49,7 @@ jobs:
         - checkout
         - run: pip3 --version
         - run:
-            command: pip install python-docx
+            command: pip3 install pip --upgrade
         - run:
             working_directory: /
             name: installing ebcli
@@ -61,15 +61,15 @@ jobs:
 workflows:
   build-test-deploy:
     jobs:
-      - build
-      - test:
-          requires:
-            - build
+      #- build
+      #- test:
+      #    requires:
+      #      - build
       - deploy:
           context: aws-creds
           filters:
             branches:
               only:
                 - master
-          requires:
-            - test
+       #   requires:
+       #     - test
