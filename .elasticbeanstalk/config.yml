@@ -1,0 +1,8 @@
+branch-defaults:
+  master:
+    environment: Docker-tutorial-front-end-env-$CIRCLECI_BRANCH
+global:
+  application_name:  docker-tutorial-front-end
+  default_platform: 64bit Amazon Linux 2/3.4.16
+  default_region: us-east-1
+  sc: git
