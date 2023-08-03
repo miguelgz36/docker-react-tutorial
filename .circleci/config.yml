@@ -1,7 +1,6 @@
 version: 2.1
 orbs:
-  aws-elastic-beanstalk: circleci/aws-elastic-beanstalk@2.0.1
-
+  eb: circleci/aws-elastic-beanstalk@1.0.0
 executors:
   docker-image:
     docker:
@@ -75,10 +74,13 @@ workflows:
       #      branches:
       #        only:
       #          - master
-      - aws-elastic-beanstalk/deploy:
-          application-name: docker-tutorial-front-end 
-          environment-name: Docker-tutorial-front-end-env 
-          app-dir: . 
-          image: cimg/base           
+      - eb/deploy:
+          context: aws-creds
+          environment-name: Docker-tutorial-front-end-env
+          filters:
+            branches:
+              only:
+                - master
+          label: version-<<pipeline.number>>        
        #   requires:
        #     - test
