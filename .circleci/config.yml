@@ -44,36 +44,14 @@ jobs:
             docker image load < "images/miguelgz_circleci-demo-docker"    
       - run: |
           docker run -e CI=true miguelgz/circleci-demo-docker npm run test
-  deploy:
-      docker:
-        - image: cimg/python:3.7.3
-      steps:
-        - checkout
-        - run: pip3 --version
-        - run:
-            command: pip3 install wheel
-        - run:
-            working_directory: /
-            name: installing ebcli
-            command: pip3 install awsebcli --upgrade --user   
-        - run: eb --version
-        - run:
-            name: deploying with awsebcli
-            command: eb deploy  docker-tutorial-front-end-$CIRCLE_BRANCH
              
 workflows:
   build-test-deploy:
     jobs:
-      #- build
-      #- test:
-      #    requires:
-      #      - build
-      #- deploy:
-      #    context: aws-creds
-      #    filters:
-      #      branches:
-      #        only:
-      #          - master
+      - build
+      - test:
+          requires:
+            - build
       - eb/deploy:
           context: aws-creds
           environment-name: Docker-tutorial-front-end-env
@@ -82,5 +60,5 @@ workflows:
               only:
                 - master
           label: version-<<pipeline.number>>        
-       #   requires:
-       #     - test
+          requires:
+            - test
