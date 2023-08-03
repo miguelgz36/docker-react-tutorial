@@ -59,6 +59,6 @@ workflows:
             branches:
               only:
                 - master
-          platform-version: docker-1.6.0        
+          platform-version: 64bit Amazon Linux 2015.03 v1.4.1 running Docker 1.6.0        
         #  requires:
         #    - test
