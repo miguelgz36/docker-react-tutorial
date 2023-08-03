@@ -49,11 +49,11 @@ jobs:
         - checkout
         - run: pip3 --version
         - run:
+            command: pip install wheel
+        - run:
             working_directory: /
             name: installing ebcli
-            command: pip3 install awsebcli --upgrade --user
-        - run:
-            command: pip install wheel   
+            command: pip3 install awsebcli --upgrade --user   
         - run: eb --version
         - run:
             name: deploying with awsebcli
