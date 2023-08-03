@@ -44,7 +44,17 @@ jobs:
             docker image load < "images/miguelgz_circleci-demo-docker"    
       - run: |
           docker run -e CI=true miguelgz/circleci-demo-docker npm run test
-             
+  eb-deploy:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - eb/setup
+      - run:
+          command: |
+            eb deploy docker-react-tutorial-env
+            eb status
+          name: You may now use the EB CLI within this jo           
 workflows:
   build-test-deploy:
     jobs:
@@ -52,13 +62,11 @@ workflows:
       #- test:
       #    requires:
       #      - build
-      - eb/deploy:
+      - eb-deploy:
           context: aws-creds
-          environment-name: docker-react-tutorial-env
           filters:
             branches:
               only:
                 - master
-          platform-version: docker        
         #  requires:
         #    - test
