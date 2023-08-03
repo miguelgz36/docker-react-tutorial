@@ -1,4 +1,7 @@
 version: 2.1
+orbs:
+  aws-elastic-beanstalk: circleci/aws-elastic-beanstalk@2.0.1
+
 executors:
   docker-image:
     docker:
@@ -44,7 +47,7 @@ jobs:
           docker run -e CI=true miguelgz/circleci-demo-docker npm run test
   deploy:
       docker:
-        - image: cimg/python:3.11.4
+        - image: cimg/python:3.7.3
       steps:
         - checkout
         - run: pip3 --version
@@ -57,7 +60,8 @@ jobs:
         - run: eb --version
         - run:
             name: deploying with awsebcli
-            command: eb deploy  docker-tutorial-front-end-$CIRCLE_BRANCH        
+            command: eb deploy  docker-tutorial-front-end-$CIRCLE_BRANCH
+             
 workflows:
   build-test-deploy:
     jobs:
@@ -65,11 +69,16 @@ workflows:
       #- test:
       #    requires:
       #      - build
-      - deploy:
-          context: aws-creds
-          filters:
-            branches:
-              only:
-                - master
+      #- deploy:
+      #    context: aws-creds
+      #    filters:
+      #      branches:
+      #        only:
+      #          - master
+      - aws-elastic-beanstalk/deploy:
+          application-name: docker-tutorial-front-end 
+          environment-name: Docker-tutorial-front-end-env 
+          app-dir: . 
+          image: cimg/base           
        #   requires:
        #     - test
