@@ -1,0 +1,8 @@
+branch-defaults:
+  master:
+    environment: docker-react-tutorial-env
+global:
+  application_name: docker-react-tutorial
+  default_platform: 64bit Amazon Linux 2/3.4.16
+  default_region: us-east-1
+  sc: git
