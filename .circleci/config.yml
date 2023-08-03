@@ -59,6 +59,6 @@ workflows:
             branches:
               only:
                 - master
-          platform-version: 64bit Amazon Linux 2/3.4.16        
+          platform-version: Docker AL2 version 3.6.0        
         #  requires:
         #    - test
