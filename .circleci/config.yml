@@ -58,6 +58,7 @@ workflows:
           filters:
             branches:
               only:
-                - master    
+                - master
+          platform-version: 64bit Amazon Linux 2/3.4.16        
         #  requires:
         #    - test
