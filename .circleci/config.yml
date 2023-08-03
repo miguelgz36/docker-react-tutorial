@@ -41,7 +41,21 @@ jobs:
           command: |
             docker image load < "images/miguelgz_circleci-demo-docker"    
       - run: |
-          docker run -e CI=true miguelgz/circleci-demo-docker npm run test        
+          docker run -e CI=true miguelgz/circleci-demo-docker npm run test
+  deploy:
+      docker:
+        - image: cimg/python:3.10
+      steps:
+        - checkout
+        - run: pip3 --version
+        - run:
+            working_directory: /
+            name: installing ebcli
+            command: pip3 install awsebcli --upgrade --user
+        - run: eb --version
+        - run:
+            name: deploying with awsebcli
+            command: eb deploy  docker-tutorial-front-end-$CIRCLE_BRANCH        
 workflows:
   build-test-deploy:
     jobs:
