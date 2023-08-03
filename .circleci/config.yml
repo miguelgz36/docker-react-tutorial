@@ -49,7 +49,7 @@ jobs:
         - checkout
         - run: pip3 --version
         - run:
-            command: pip3 install pip --upgrade
+            command: pip3 install wheel
         - run:
             working_directory: /
             name: installing ebcli
