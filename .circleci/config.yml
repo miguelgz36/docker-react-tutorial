@@ -60,5 +60,5 @@ workflows:
               only:
                 - master
           label: version-<<pipeline.number>>        
-          requires:
-            - test
+        #  requires:
+        #    - test
