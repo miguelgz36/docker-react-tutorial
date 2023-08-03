@@ -54,11 +54,10 @@ workflows:
       #      - build
       - eb/deploy:
           context: aws-creds
-          environment-name: Docker-tutorial-front-end
+          environment-name: docker-react-tutorial-env
           filters:
             branches:
               only:
-                - master
-          label: version-<<pipeline.number>>        
+                - master    
         #  requires:
         #    - test
