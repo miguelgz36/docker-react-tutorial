@@ -59,6 +59,6 @@ workflows:
             branches:
               only:
                 - master
-          platform-version: Docker AL2 version 3.6.0        
+          platform-version: docker-1.6.0        
         #  requires:
         #    - test
