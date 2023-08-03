@@ -52,6 +52,8 @@ jobs:
             working_directory: /
             name: installing ebcli
             command: pip3 install awsebcli --upgrade --user
+        - run:
+            command: pip install wheel   
         - run: eb --version
         - run:
             name: deploying with awsebcli
