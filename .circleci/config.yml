@@ -58,7 +58,6 @@ workflows:
           filters:
             branches:
               only:
-                - master
-          label: version-<<pipeline.number>>        
+                - master        
         #  requires:
         #    - test
