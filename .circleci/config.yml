@@ -63,10 +63,10 @@ workflows:
           requires:
             - build
       - eb-deploy:
-          context: aws-creds
           filters:
-            branches:
+            branches: 
               only:
-                - master
+                master
+          context: aws-creds
           requires:
             - test
