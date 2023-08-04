@@ -58,23 +58,11 @@ jobs:
 workflows:
   build-test-deploy:
     jobs:
-      - build:
-          filters:
-            branches:
-              only:
-                - master
+      - build
       - test:
-          filters:
-            branches:
-              only:
-                - master
           requires:
             - build
       - eb-deploy:
           context: aws-creds
-          filters:
-            branches:
-              only:
-                - master
           requires:
             - test
